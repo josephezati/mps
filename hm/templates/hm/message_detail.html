@@ -1,0 +1,91 @@
+{% extends 'hm/messanger.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block message %} 
+    {% if message %}
+    <div id="viewmail" class="tab-pane fade in shadow-reset custom-inbox-message active">
+        <div class="view-mail-wrap">
+            <div class="mail-title">
+                <h2>View Message</h2>
+            </div>
+            <div class="main-title-hd">
+                <h3>Subject: <span class="main-title-view">{{message.subject}}</span></h3>
+            </div>
+            <div class="view-author-mail">
+                {% if message.sender == user %}
+                <span>To: <span class="view-mail-email">{% for rx in message.receiver.all %}{{rx.username}},{% endfor %}</span></span>
+                {% else %}
+                <span>From: <span class="view-mail-email">{{message.sender}}</span></span>
+                {% endif %}
+                <span class="view-mail-date">{{message.date_created}}</span>
+            </div>
+            <div class="view-mail-content">
+                <p>{{message.message_body}}</p>
+            </div>
+            {% if message.uploads  %}
+            <div class="row mg-b-30">
+                <div class="col-lg-6">
+                    <div class="view-mail-file-list">
+                        <a href="{{message.uploads.url}}" target="_blank">
+                        <div class="view-file-in">
+                            <i class="fa fa-file"></i>
+                        </div>
+                        <div class="file-type-view">
+                            <h5>{{ message.uploads|filename }}</h5>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+             <div class="user-profile-comment-list">
+                {% for reply in replys %}
+                <div class="row profile-comment-mg">
+                    <div class="col-lg-2">
+                        <div class="user-profile-comment-img projuct-details-img-tab">
+                            <a href="#"><img src="{{reply.replyer.userprofile.photo.url}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="user-profile-comment-content">
+                            <p><strong>{{reply.replyer.first_name}} {{reply.replyer.first_name}} @ </strong> {{reply.reply_body}}</p>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="comment-date-profile profile-details-name-nn">
+                                        <span>{{reply.date_created}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row profile-comment-mg">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="col-lg-2">
+                        <div class="user-profile-comment-img projuct-details-img-tab">
+                            <a href="#"><img src="{{user.userprofile.photo.url}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="user-profile-comment-input">
+                            <textarea name="reply_body" cols="30" rows="10" placeholder="Write Comment.."></textarea>
+                            <input type="File" name="uploads">
+                            <input type="submit" name="submit" value="Reply" class="btn btn-success mg-b-30 mg-t-30">
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock message %}

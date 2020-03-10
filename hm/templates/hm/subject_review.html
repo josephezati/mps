@@ -1,0 +1,72 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="button-adminpro-area mg-t-30 mg-b-30">
+<div class="container">
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="sparkline13-list shadow-reset">
+        <div class="sparkline13-hd">
+            <div class="main-sparkline13-hd">
+                <h1>Review Performance  for {{subject}} {{marks_class}} {{stream}} {{year}} {{term}}<span class="table-project-n"></span></h1>
+            </div>
+        </div>
+        <div class="sparkline13-graph">
+            <form accept="" method="POST" style="text-align: left;" enctype="multipart/form-data">
+            {% csrf_token %}
+                <table width="1100" border="1">
+                    <thead>
+                        <tr>
+                            <th>Child Name</th>
+                            {% for exam_set in exam_sets %}
+                            <th>{{exam_set.short_form}}</th> 
+                            {% endfor %}
+                            <th>Remark</th>
+                        </tr>  
+
+                            
+                        
+                    </thead>
+                    <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td><a href="{% url 'child-details' student.child.id %}" >{{student.child}}</a></td>
+                            {% for exam_set in exam_sets %}
+                            <td>{% for mark in marks %}
+                            {% if mark.child.id == student.id and mark.exam_set.id == exam_set.id and mark.subject.id == subject.id %}{{mark.marks}}{% endif %}
+                            {% endfor %}</td> 
+                            {% endfor %}
+                            <input type="text" name="child" value="{{ student.child.id }}" class="form-group" hidden="hidden"></input>
+
+                            <td>
+                            {% for remark in remarks %}
+                            {% if remark.child.id == student.id and remark.subject.id == subject.id and remark.term.id == term.id and remark.marks_class.id == marks_class.id and remark.year.id == year.id %} {{remark.remark}}
+                            {% else %}
+                            {% endif %}
+                            {% endfor %}
+                            <input type="text" name="remark" placeholder="Enter remark" required="required"></input>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+                <div style="text-align: right;" >
+                <input type="submit" class="btn btn-success"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,90 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="button-ad-wrap mg-b-40">
+
+                <h4>Choose Expense Report Range</h4> 
+                    <form method="GET" action="{% url 'bill-report' %}" enctype="multipart/form-data">
+                        {% csrf_token %} 
+                        <div class="row">
+                        <div class="col-lg-5 col-md-9 col-sm-6 col-xs-12">
+                        <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                        <div class="input-daterange input-group" id="datepicker">
+                            <input type="date" class="form-control" name="start" required="required" />
+                            <span class="input-group-addon">to</span>
+                            <input type="date" class="form-control" name="end" required="required" />
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-9 col-sm-6 col-xs-12">
+                        <button class="btn btn-success mg-b-4 " type="submit">Select</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n"> The selected Expense Report {{start}} - {{end}}</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="item" data-editable="false">Item</th>
+                                            <th data-field="from" data-editable="false">Quantity</th>
+                                            <th data-field="amount" data-editable="false">Unit</th>
+                                            <th data-field="tot_amount" data-editable="false">Total</th>
+                                            <th data-field="date" data-editable="false">Date</th>
+                                            <th data-field="upload" data-editable="false">Upload</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for bill in bills %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{bill.item}}</td>
+                                            <td>{{bill.quantity}} {{bill.unit_measure}}</td>
+                                            <td>{{bill.unit_cost|intcomma}}</td>
+                                            <td>{{bill.total_cost|intcomma}}</td>
+                                            <td>{{bill.date}}</td>
+                                            <td><a href="{% if bill.uploads %}{{bill.uploads.url}}{% endif %}" target="_blank">{% if bill.uploads %}upload{% endif %}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tfoot><tr>
+                                        <td></td><td></td><td></td><td><strong>Total: </strong></td><td><strong>{{total_fees.total_cost__sum|intcomma}}</strong></td><td></td><td></td>
+                                    </tr></tfoot>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

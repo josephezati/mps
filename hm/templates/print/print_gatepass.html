@@ -1,0 +1,49 @@
+{% extends 'print/base.html' %}
+{% load static %}
+{% block content %}
+<table width="950" height="116" border="0" align="center" bgcolor="#FFFFFF">
+      <tr>
+        <td width="120" rowspan="5"><img name="" src="{% static 'img/logo/scl_logo.png' %}" alt = " School photo" width="112" height="140" alt="" /></td>
+        <td height="37" colspan="2" align="center"><h2><font ><strong>MBARARA PREPARATORY SCHOOL</strong></font></h2></td>
+        <td width="124" rowspan="5" align="center"><img src="{{student.photo.url}}" alt="{{student.name}}`s photo" width="119" height="140" /></td>
+      </tr>
+      <tr>
+      <td height="23" colspan="2" align="center"><strong><font >BOMA Mbarara, Uganda</font></strong>,</br> <strong><font > Tel : </font></strong><font color="#0000FF"> <strong>+25699999999999</strong></font></br> <strong><font >Email :</font></strong> <font color="#0000FF"> <strong>info@mps.co.ug </strong></font></td>
+      </tr>
+      <tr>
+        <!--<td colspan="2" align="center"><strong><font >Administrator's Mobile:</font></strong><font color="#0000FF"><strong>&nbsp; (H/M) 0772877550/0704573224,&nbsp; (DH/M) 0782328403/0701328403</strong></font></td>-->
+      </tr>
+      <tr>
+     <td width="552" align="Right" colspan="2"><strong><font> Date :</font></strong><font color="#0000FF"> {% now "SHORT_DATETIME_FORMAT" %}<strong></strong></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+       <tr>
+        <td height="24"  align="center" colspan="2"><h3><u><strong><font > CHILDREN'S GATE PASS PERMISSION SHEET</font></strong></u></h3></td>
+      </tr>
+</table>
+<table width="950" height="250" border="1" align="center" bgcolor="#FFFFFF" class='er'>
+<tr><th colspan="8">CHILD DETAILS</th><th colspan="8">GATE PASS DETAILS</th></tr>
+      <tr>
+        <td colspan="8">Name: {{student.name}}</td>
+        <td colspan="8">Reason: {{gatepass.reason}}</td>
+        </tr><tr>
+        <td colspan='8'>Gender: {{student.gender}}</td>
+        <td colspan='8'>Return Date: {{gatepass.return_date}}</td>
+        </tr><tr>
+        <td colspan='8'>Date of Birth: {{student.date_of_birth}}</td>
+        <td colspan='8'>Number of Days: {{gatepass.duration}}</td>
+      </tr><tr>
+        <td colspan='8'></td>
+        <td colspan='8'>Picked by: {{gatepass.picked_by}}</td>
+      </tr><tr>
+        <td colspan='8'></td>
+        <td colspan='8'>Authorised by: {{gatepass.authorised_by}}</td>
+      </tr>
+      <tr>
+        <td colspan='8'></td>
+        <td colspan='8'>............ .............. ............ ............</td>
+      </tr>
+      <tr>
+        <td colspan='8'></td>
+        <td colspan='8'>Sign</td>
+      </tr>
+</table>
+{% endblock content %}

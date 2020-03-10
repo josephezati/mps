@@ -1,0 +1,84 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="button-adminpro-area mg-t-40">
+<div class="container">
+<div class="row">
+
+<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+        <div class="income-title">
+            <div class="main-income-head">
+                <h2>Track {{year}} {{term}} Attendance for {{card_class}} {{stream}}</h2>
+            </div>
+        </div>
+        <div class="income-dashone-pro">
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}  
+            <fieldset>
+            <table class="table border-table table-stripped">
+            <thead>
+                <tr>
+                    <th>Reg. No</th>
+                    <th>Child Name</th>
+                    <th>Attenndace</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+                
+                <input type="text" name="child" value="{{ student.child.id }}" class="form-group" hidden="hidden"></input>
+                <tr>
+                    <td>{{student.reg_no}}</td>
+                    <td>{{ student.child }}</td>
+                    <td>
+                    <select name="attendance" >
+                        <option value="1">---Present---</option>
+                        <option value="2">---Absent---</option>
+                    </select></td>
+               <td><input type="text" value="{% now 'SHORT_DATE_FORMAT' %}" name="date"></input></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">submit</button>
+
+
+            </fieldset>
+        </form> 
+        
+        </div>
+    </div>
+</div>
+<!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+        <div class="income-title">
+            <div class="main-income-head">
+                <h2>Choose fields to Enter Marks</h2>
+            </div>
+        </div>
+        <div class="income-dashone-pro">
+        <form method="GET" action="{% url 'enter-marks' %}" enctype="multipart/form-data">
+            {% csrf_token %}    
+            <fieldset>
+                {{ select_form|crispy }}
+                <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Continue</button>
+            </fieldset>
+        </form>        </div>
+    </div>
+</div> -->
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

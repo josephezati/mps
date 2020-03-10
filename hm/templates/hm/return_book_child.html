@@ -1,0 +1,112 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+<div class="row">
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+<div class="project-details-wrap shadow-reset">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="project-details-title">
+                <h2><span class="profile-details-name-nn">Return Book</span></h2>
+            </div>
+            <ul id="adminpro-demo2" class="comment-action-st collapse">
+                </li>
+                <li><a href="" target="_blank">Update</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="admin-comment-month project-details-action">
+                <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2"></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>{{borrower}}:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{% if book.child %}{{ book.child }}{% else %}{{ book.staff }}{% endif %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Book:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{{ book.book}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Date Borrowed:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ book.date_borrowed|date:"N y, Y"}} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Return Date :</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <span>{{ book.return_date|date:"N y, Y"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="project-details-st">
+                            <h4>Update the status to confirm</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}  
+                                    {{ form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

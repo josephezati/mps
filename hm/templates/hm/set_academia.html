@@ -1,0 +1,187 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Streams</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter stream" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_stream">Save</button></td></tr>
+                        {% for stream in streams %} 
+                        
+                            <tr>
+                                <td>{{stream.name}}</td>
+                                <td><a href="{% url 'delete-stream' stream.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Classes</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Class" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_class">Save</button></td></tr>
+                        {% for class in classes %} 
+                        
+                            <tr>
+                                <td>{{class.name}}</td>
+                                <td><a href="{% url 'delete-clas' class.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Sports</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Sports" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_sport">Save</button></td></tr>
+                        {% for sport in sports %} 
+                            <tr>
+                                <td>{{sport.name}}</td>
+                                <td><a href="{% url 'delete-sport' sport.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Hygiene</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="level" placeholder="Enter Sports" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_hygiene">Save</button></td></tr>
+                        {% for level in hygiene_levels %} 
+                        
+                            <tr>
+                                <td>{{level.level}}</td>
+                                <td><a href="{% url 'delete-hygiene' level.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30">
+            <h4>Reading</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="level" placeholder="Reading Level" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_reading">Save</button></td></tr>
+                        {% for level in reading_levels %} 
+                            <tr>
+                                <td>{{level.level}}</td>
+                                <td><a href="{% url 'delete-reading' level.id %}">remove</a></td>
+                            </tr>
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30">
+            <h4>Participation</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="level" placeholder="Participation Level" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_participation">Save</button></td></tr>
+                        {% for level in participation_levels %} 
+                            <tr>
+                                <td>{{level.level}}</td>
+                                <td><a href="{% url 'delete-participation' level.id %}">remove</a></td>
+                            </tr>
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30">
+            <h4>Leadership</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="level" placeholder="Leadership Skills" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_leadership">Save</button></td></tr>
+                        {% for level in leadership_levels %} 
+                        
+                            <tr>
+                                <td>{{level.level}}</td>
+                                <td><a href="{% url 'delete-leadership' level.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="button-ad-wrap mg-b-30">
+            <h4>Smartness</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="level" placeholder="Smartness Level" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_smartness">Save</button></td></tr>
+                        {% for level in smartness_levels %} 
+                        
+                            <tr>
+                                <td>{{level.level}}</td>
+                                <td><a href="{% url 'delete-smartness' level.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

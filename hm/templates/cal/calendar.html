@@ -1,0 +1,24 @@
+{% extends "hm/base.html" %}
+{% load has_group %}
+{% load humanize %}
+{% block content %}
+<div class="button-adminpro-area mg-t-30 mg-b-30">
+	<div class="container">
+		<div class="sparkline13-list shadow-reset">
+			<div class="sparkline13-hd">
+        <div class="main-sparkline13-hd">
+            <h1>Welcome <strong>{{user.first_name}} {{user.last_name}}! </strong> <span class="table-project-n"></span></h1>
+            <div class="sparkline13-outline-icon">
+                <div>
+                	 <a class="btn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>  <a class="btn btn-info right" href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="sparkline13-graph">
+		{{ calendar }}
+	</div>
+	</div>
+	</div>
+</div>
+{% endblock content %}

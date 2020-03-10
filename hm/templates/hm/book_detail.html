@@ -1,0 +1,211 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+<div class="row">
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+<div class="project-details-wrap shadow-reset">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="project-details-title">
+                <h2><span class="profile-details-name-nn">{{ book.title}}</span></h2>
+            </div>
+            <ul id="adminpro-demo2" class="comment-action-st collapse">
+                </li>
+                <li><a href="" target="_blank">Update</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="admin-comment-month project-details-action">
+                <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2">More...</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="project-details-st">
+                            <img src="{{book.uploads.url}}" alt="{{book.title}}`s Photo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Status:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{{ status }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Number:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{{ book.number}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Title:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ book.title}} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Auther :</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <span>{{ book.auther}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="project-details-tab">
+                <ul class="nav nav-tabs res-pd-less-sm">
+                    <li class="active"><a data-toggle="tab" href="#children_b">Borrowings By Children</a>
+                    <li><a data-toggle="tab" href="#staff_b">Borrowings By Staff</a>
+                    </li>
+                </ul>
+            <div class="tab-content res-tab-content-project">
+            <!-- content tab  -->
+            <div id="children_b" class="tab-pane in active fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar1">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Child</th>
+                                            <th data-field="book" data-editable="false">Book</th>
+                                            <th data-field="date_b" data-editable="false">Date Borrowed</th>
+                                            <th data-field="r_date" data-editable="false">Return Date</th>
+                                            <th data-field="status" data-editable="false">Status</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for borrow in child_borrowings %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{borrow.child}}</a></td>
+                                            <td>{{borrow.book}}</td>
+                                            <td>{{borrow.date_borrowed}}</td>
+                                            <td>{{borrow.return_date}}</td>
+                                            <td>{% if borrow.status.id == 1 %}<a href="" class="btn btn-danger">{{borrow.status}} </a>{% else %}<a href="" class="btn btn-success">{{borrow.status}} </a>{% endif %}</td>
+                                            <td><div class="modal-bootstrap modal-login-form">
+                                            <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#view_admit_child">View</a>
+                                            </div> <div class="modal-bootstrap modal-login-form">
+                                            <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#view_admit_child">Edit</a>
+                                            </div></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div id="staff_b" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar2">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar2">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Staff</th>
+                                            <th data-field="book" data-editable="false">Book</th>
+                                            <th data-field="date_b" data-editable="false">Date Borrowed</th>
+                                            <th data-field="r_date" data-editable="false">Return Date</th>
+                                            <th data-field="status" data-editable="false">Staus</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for borrow in staff_borrowings %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{borrow.staff}}</a></td>
+                                            <td>{{borrow.book}}</td>
+                                            <td>{{borrow.date_borrowed}}</td>
+                                            <td>{{borrow.return_date}}</td>
+                                            <td>{% if borrow.status.id == 1 %}<a href="" class="btn btn-danger">{{borrow.status}} </a>{% else %}<a href="" class="btn btn-success">{{borrow.status}} </a>{% endif %}</td>
+                                            <td><div class="modal-bootstrap modal-login-form">
+                                            <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#view_admit_child">View</a>
+                                            </div> <div class="modal-bootstrap modal-login-form">
+                                            <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#view_admit_child">Edit</a>
+                                            </div></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

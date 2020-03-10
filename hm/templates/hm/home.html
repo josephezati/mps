@@ -1,0 +1,239 @@
+{% extends "hm/base.html" %}
+{% load has_group %}
+{% load humanize %}
+{% block content %}
+    <!-- income order visit user Start -->
+    {% if request.user|has_group:"HM" %}
+    <div class="income-order-visit-user-area mg-t-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Fees</h2>
+                                <div class="main-income-phara">
+                                    <p>This Year</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span>UGX </span><span class="counter">{{total_fees.fees_amount|intcomma}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline1"></span>
+                                </div>
+                            </div>
+                            <div class="income-range">
+                                <p>Total income</p>
+                                <span class="income-percentange">98% <i class="fa fa-bolt"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Students</h2>
+                                <div class="main-income-phara order-cl">
+                                    <p>This year</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{total_students}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline6"></span>
+                                </div>
+                            </div>
+                            <div class="income-range order-cl">
+                                <p>New Students</p>
+                                <span class="income-percentange">66% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Staff</h2>
+                                <div class="main-income-phara visitor-cl">
+                                    <p>This Year</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{total_staff}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline2"></span>
+                                </div>
+                            </div>
+                            <div class="income-range visitor-cl">
+                                <p>New Staff</p>
+                                <span class="income-percentange">55% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Expenses</h2>
+                                <div class="main-income-phara low-value-cl">
+                                    <p>This Year</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3>UGX <span class="counter">{{total_expenses.expense_amount|intcomma}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline5"></span>
+                                </div>
+                            </div>
+                            <div class="income-range low-value-cl">
+                                <p>In first month</p>
+                                <span class="income-percentange">33% <i class="fa fa-level-down"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- income order visit user Start -->
+    <div class="income-order-visit-user-area mg-t-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Gate Pases</h2>
+                                <div class="main-income-phara">
+                                    <p>This Term</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span></span><span class="counter">{{gatepass}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline1"></span>
+                                </div>
+                            </div>
+                            <div class="income-range">
+                                <p>Termly</p>
+                                <span class="income-percentange">8% <i class="fa fa-bolt"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Calendar</h2>
+                                <div class="main-income-phara order-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">10</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline6"></span>
+                                </div>
+                            </div>
+                            <div class="income-range order-cl">
+                                <p>Busy Rate</p>
+                                <span class="income-percentange">66% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Attendance</h2>
+                                <div class="main-income-phara visitor-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{attendance}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline2"></span>
+                                </div>
+                            </div>
+                            <div class="income-range visitor-cl">
+                                <p>Daily</p>
+                                <span class="income-percentange">99% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Messages</h2>
+                                <div class="main-income-phara low-value-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{message}}</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline5"></span>
+                                </div>
+                            </div>
+                            <div class="income-range low-value-cl">
+                                <p>This month</p>
+                                <span class="income-percentange">33% <i class="fa fa-level-down"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif request.user|has_group:"TEACHER" %}
+    {% else %}
+    {% endif %}
+    {% endblock content %}

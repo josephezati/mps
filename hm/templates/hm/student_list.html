@@ -1,0 +1,90 @@
+{% extends "hm/base.html" %}
+{% load get_obj %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n"> children</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                 <div id="tool">
+                                <form method="GET" action="{% url 'selected-children' %}" enctype="multipart/form-data">
+                                   
+                                        {% csrf_token %} 
+                                            <label>Class</label>
+                                            <select data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1" name="the_class" required="required">
+                                                <option value="">all</option>
+                                                {% for class in class_list %}
+                                                {% if the_class.id == class.id %}
+                                                <option value="{{class.id}}" selected="selected">{{class.name}}</option>
+                                                {% else %}
+                                                <option value="{{class.id}}">{{class.name}}</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                            <label>Year</label>
+                                            <select data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1" name="year" required="required">
+                                                <option value="">all</option>
+                                                <option value="2020" selected="{% if year == 2020 %}selected{% endif %}">2020</option>
+                                                <option value="2019">2019</option>
+                                            </select>
+                                        <input type="submit" name="submit" value="Fetch">
+                                    
+                                </form>
+                                </div>
+                                
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#tool">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="dof" data-editable="false">DoB.</th>
+                                            <th data-field="gender" data-editable="false">Gender.</th>
+                                            <th data-field="dst" data-editable="false">Class</th>
+                                            <th data-field="sch" data-editable="false">Stream</th>
+                                            <th data-field="yr" data-editable="false">Year</th>
+                                            <th data-field="act" data-editable="false">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for child in children %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'child-details' child.id %}" >{{child.name}}</a></td>
+                                            <td>{{child.date_of_birth|date:"N d, Y"}}</td>
+                                            <td>{{child.gender}}</td>
+                                            <td>{% for class in classes %}
+                                             {% if child.id == class.child %}
+                                            {% get_current_class class.current "current_class" %}{% endif %}{% endfor %}</td>
+                                            <td> {% for class in classes %}
+                                             {% if child.id == class.child %}
+                                            {% get_current_class class.current "stream" %}{% endif %}{% endfor %}</td>
+                                            <td>{% for class in classes %}
+                                             {% if child.id == class.child %}
+                                            {% get_current_class class.current "year_of_registration" %}{% endif %}{% endfor %}</td>
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'child-details' child.id %} " style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a> <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-child' child.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> edit</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

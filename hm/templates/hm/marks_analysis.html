@@ -1,0 +1,132 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load get_obj %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="data-table-area mg-t-40 mg-b-40">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="button-ad-wrap mg-b-40">
+
+        <h4>Select Result to Analyse</h4> 
+            <form method="GET" action="{% url 'marks-analysis' %}" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="row">
+                <div class="col-lg-8 col-md-9 col-sm-6 col-xs-12">
+                <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+                <div class="chosen-select-single mg-b-20" >
+                    <label>Select the Year</label>
+                    <select data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1" name="year">
+                        <option value="2020">2020</option>
+                    </select>
+                    <label> The Term </label>
+                    <select name="term" data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1">
+                        {% for theterm in terms %}
+                            {% if theterm.id == term.id  %}
+                            <option value="{{theterm.id}}" selected="selected">{{theterm.name}}</option>
+                            {% else  %}
+                            <option value="{{theterm.id}}">{{theterm.name}}</option>
+                            {% endif  %}
+                        {% endfor %}
+                    </select>
+                    <label>The Subject</label>
+                    <select data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1" name="subject">
+                        {% for thesubject in subjects %}
+                        {% if thesubject.id == subject.id  %}
+                        <option value="{{thesubject.id}}" selected="selected">{{thesubject.name}}</option>
+                        {% else  %}
+                        <option value="{{thesubject.id}}">{{thesubject.name}}</option>
+                        {% endif  %}
+                        {% endfor %}
+                    </select>
+                    <label>Exam Set</label>
+                    <select data-placeholder="Choose a Year..." class="chosen-select" tabindex="-1" name="examset">
+                        {% for theexamset in examsets %}
+                        {% if theexamset.id == examset.id  %}
+                        <option value="{{theexamset.id}}" selected="selected">{{theexamset.name}}</option>
+                        {% else  %}
+                        <option value="{{theexamset.id}}">{{theexamset.name}}</option>
+                        {% endif  %}
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                </div>
+                <div class="col-lg-3 col-md-9 col-sm-6 col-xs-12">
+                <button class="btn btn-success mg-b-4 " type="submit">Select</button>
+                </div>
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="col-lg-12">
+
+            <div class="sparkline13-list shadow-reset">
+                <div class="sparkline13-hd">
+                    <div class="main-sparkline13-hd">
+                        <h1>{{ head }}<span class="table-project-n"> {{examset}}({{examset.short_form}}) Results for {{subject}} {{year}} {{term}}</span></h1>
+                        <div class="sparkline13-outline-icon">
+                            <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            <span><i class="fa fa-wrench"></i></span>
+                            <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sparkline13-graph">
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div id="toolbar">
+                        </div>
+                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="dof" data-editable="false">Class</th>
+                                    <th data-field="stream" data-editable="false">Stream</th>
+                                    <th data-field="d1" data-editable="false">D1</th>
+                                    <th data-field="d2" data-editable="false">D2</th>
+                                    <th data-field="C3" data-editable="false">C3</th>
+                                    <th data-field="C4" data-editable="false">C4</th>
+                                    <th data-field="C5" data-editable="false">C5</th>
+                                    <th data-field="C6" data-editable="false">C6</th>
+                                    <th data-field="P7" data-editable="false">P7</th>
+                                    <th data-field="P8" data-editable="false">P8</th>
+                                    <th data-field="F9" data-editable="false">F9</th>
+                                    <th data-field="total" data-editable="false">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for mark in analysis %}
+                                <tr>
+                                    <td></td>
+                                    <td>{% get_class mark.marks_class "name" %}</td>
+                                    <td>{% get_stream mark.stream "name" %}</td>
+                                    <td>{{mark.d1count}}</td>
+                                    <td>{{mark.d2count}}</td>
+                                    <td>{{mark.c3count}}</td>
+                                    <td>{{mark.c4count}}</td>
+                                    <td>{{mark.c5count}}</td>
+                                    <td>{{mark.c6count}}</td>
+                                    <td>{{mark.p7count}}</td>
+                                    <td>{{mark.p8count}}</td>
+                                    <td>{{mark.f9count}}</td>
+                                    <td>{{mark.totalcount}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

@@ -1,0 +1,95 @@
+{% extends "hm/base.html" %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="sparkline13-list shadow-reset">
+                <div class="sparkline13-hd">
+                    <div class="main-sparkline13-hd">
+                        <h1>{{ head }}<span class="table-project-n"> Select a child to lend book</span></h1>
+                        <div class="sparkline13-outline-icon">
+                            <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            <span><i class="fa fa-wrench"></i></span>
+                            <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sparkline13-graph">
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div id="toolbar">
+                        </div>
+                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="false" data-key-events="false" data-show-toggle="false" data-resizable="false" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="name" data-editable="false">Name</th>
+                                    <th data-field="dof" data-editable="false">DoB.</th>
+                                    <th data-field="gender" data-editable="false">Gender.</th>
+                                    <th data-field="act" data-editable="false">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for child in children %}
+                                <tr>
+                                    <td></td>
+                                    <td><a href="{% url 'child-details' child.id %}" >{{child.name}}</a></td>
+                                    <td>{{child.date_of_birth|date:"N d, Y"}}</td>
+                                    <td>{{child.gender}}</td>
+                                    <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'lend-book-child' child.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Lend Book</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="sparkline13-list shadow-reset">
+                <div class="sparkline13-hd">
+                    <div class="main-sparkline13-hd">
+                        <h1>{{ head }}<span class="table-project-n"> Select a staff to lend book</span></h1>
+                        <div class="sparkline13-outline-icon">
+                            <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            <span><i class="fa fa-wrench"></i></span>
+                            <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sparkline13-graph">
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div id="toolbar">
+                        </div>
+                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="false" data-key-events="false" data-show-toggle="false" data-resizable="false" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="name" data-editable="false">Name</th>
+                                    <th data-field="NIN" data-editable="false">NIN.</th>
+                                    <th data-field="gender" data-editable="false">Gender.</th>
+                                    <th data-field="act" data-editable="false">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for staff in staffs %}
+                                <tr>
+                                    <td></td>
+                                    <td><a href="{% url 'staff-details' staff.id %}" >{{staff.name}}</a></td>
+                                    <td>{{staff.nin}}</td>
+                                    <td>{{staff.gender}}</td>
+                                    <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'lend-book-staff' staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Lend Book</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Static Table End -->
+<!-- welcome Project, sale area start-->
+{% endblock content %}

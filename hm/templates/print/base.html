@@ -1,0 +1,182 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load has_group %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+        {% if submenu %}
+        <title>MPS - {{ title }} - {{ submenu }}</title>
+        {% else %}
+        <title>MPS - {{ title }}</title>
+        {% endif %}
+    {% else %}
+    <title>MPS</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/1.PNG' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+    <!-- switcher CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+        <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/datapicker/datepicker3.css' %}">
+    <!-- Color Css Files
+        ============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+</head>
+{% if user.is_authenticated %}
+{% else%}
+<style> 
+#body {
+  /*background-image: url("{% static 'img/bgac.jpg' %}");*/
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+</style>
+{% endif %}
+
+<body id="body">
+    {% block content %}
+    
+    {% endblock content %}
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+        ============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+        ============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+        ============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

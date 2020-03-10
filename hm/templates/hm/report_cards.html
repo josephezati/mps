@@ -1,0 +1,296 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load has_group %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+        {% if submenu %}
+        <title>MPS - {{ title }} - {{ submenu }}</title>
+        {% else %}
+        <title>MPS - {{ title }}</title>
+        {% endif %}
+    {% else %}
+    <title>MPS</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/1.PNG' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+    <!-- switcher CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+        <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/datapicker/datepicker3.css' %}">
+    <!-- Color Css Files
+        ============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+</head>
+{% if user.is_authenticated %}
+{% else%}
+<style> 
+#body {
+  /*background-image: url("{% static 'img/bgac.jpg' %}");*/
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+</style>
+{% endif %}
+
+<body id="body">
+    {% for student in students %}
+    <table width="950" height="116" border="0" align="center" bgcolor="#FFFFFF">
+      <tr>
+        <td width="120" rowspan="5"><img name="" src="{% static 'img/logo/scl_logo.png' %}" alt = " School photo" width="112" height="140" alt="" /></td>
+        <td height="37" colspan="2" align="center"><h2><font ><strong>MBARARA PREPARATORY SCHOOL</strong></font></h2></td>
+        <td width="124" rowspan="5" align="center"><img src="{{student.child.photo.url}}" alt="{{student.child.name}}`s photo" width="119" height="140" /></td>
+      </tr>
+      <tr>
+      <td height="23" colspan="2" align="center"><strong><font >BOMA Mbarara, Uganda</font></strong>,</br> <strong><font > Tel : </font></strong><font color="#0000FF"> <strong>+25699999999999</strong></font></br> <strong><font >Email :</font></strong> <font color="#0000FF"> <strong>info@mps.co.ug </strong></font></td>
+      </tr>
+      <tr>
+        <!--<td colspan="2" align="center"><strong><font >Administrator's Mobile:</font></strong><font color="#0000FF"><strong>&nbsp; (H/M) 0772877550/0704573224,&nbsp; (DH/M) 0782328403/0701328403</strong></font></td>-->
+      </tr>
+      <tr>
+     <td width="552" align="Right" colspan="2"><strong><font> Date :</font></strong><font color="#0000FF"> {% now "SHORT_DATETIME_FORMAT" %}<strong></strong></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+       <tr>
+        <td height="24"  align="center" colspan="2"><h3><u><strong><font > TERMLY EXAMINATIONS REPORT</font></strong></u></h3></td>
+      </tr>
+    </table>
+    <table width="950" height="70" border="0" align="center" bgcolor="#FFFFFF" class='er'>
+      <tr>
+        <td height="23" colspan="4"><strong><font >Name: {{student.child.name}}</font></strong> <strong></strong></td>
+        <td width="157" colspan='3'><strong><font >Class: {{card_class}}</font></strong> <strong></strong></td>
+        <td colspan="3"><strong><font >Stream:  {{stream}}</font></strong> <strong></strong></td>
+        <td colspan= '3'><strong><font >Year: {{year}}</font> 
+        
+        
+        </strong></td><td colspan= '3'><strong>Term: {{term}}<font id="term"></font>
+        </strong></td>
+      </tr>
+    </table>
+    <table  class='er' width="950" height="700" border="1" align="center"  bgcolor="#FFFFFF" style="text-align: center;">
+        <tr>
+        <th style="text-align: center;">SUBJECTS EXAMINED</th>
+        {% for exam_set in exam_sets %}
+        <th style="text-align: center;">{{exam_set.name}}</th>
+        {% endfor %}
+        <th style="text-align: center;">REMARKS</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr>
+        <td>{{subject.name}}</td>
+        {% for exam_set in exam_sets %}
+        <td>
+        {% for mark in marks %}
+        {% if mark.child.id == student.id and mark.exam_set.id == exam_set.id and mark.subject.id == subject.id %}{{mark.marks}}{% endif %}
+        {% endfor %}</td>
+        {% endfor %}
+        <td><i>{% for remark in subject_remarks %}
+        {% if remark.child.id == student.id and remark.year.id == year.id and remark.term.id == term.id and remark.subject.id == subject.id %}{{remark.remark}}{% endif %}
+        {% endfor %}</i></td>
+        </tr>
+        {% endfor %}
+        <tr>
+        <td>TOTAL</td>
+        {% for exam_set in exam_sets %}
+        <td></td>
+        {% endfor %}
+        <td></td>
+        </tr>
+        <tr>
+        <td>POSITION IN STREAM</td>
+        {% for exam_set in exam_sets %}
+        <td>...........Out of............</td>
+        {% endfor %}
+        <td></td>
+        </tr>
+        <tr>
+        <td>POSITION IN CLASS</td>
+        {% for exam_set in exam_sets %}
+        <td>...........Out of............</td>
+        {% endfor %}
+        <td></td>
+        </tr>
+    </table>
+    <table width="950" border="0" align="center"  bgcolor="#FFFFFF">
+    <tr height='50px'>
+    <td colspan='3'> CLASS TEACHER’S COMMENT(S): ....... .........<i>{% for remark in class_remarks %}
+        {% if remark.child.id == student.id and remark.year.id == year.id and remark.term.id == term.id %}{{remark.remark}}{% endif %}
+        {% endfor %}</i>............ ................ ........ Sign............. ...............................</td>
+    
+    </tr>
+    
+
+    <tr height="50px">
+    <td colspan='3'> HEAD TEACHER’S COMMENT(S): ....... .........<i>{% for remark in remarks %}
+        {% if remark.child.id == student.id and remark.year.id == year.id and remark.term.id == term.id %}{{remark.remark}}{% endif %}
+        {% endfor %}</i>............ ................ ........Sign............. ............................... ............. ................ </td>
+    </tr>
+    <tr height="50px">
+    <td colspan="3"> NEXT TERM BEGINS ON: ....... ......... ............. ...................... .................... ................... ENDS ON............. ........................................... ............ ..............</td>
+    </tr>
+    <tr height="50px">
+        <td><strong>SCHOOL REQUIREMENTS: </strong></td>
+    </tr>
+    <tr height="50px">
+        <td><p>1.) School fees: ................................................................. 2). Breakfast & Lunch Fees...........................................................</p>
+ <p>3). Books (96 Picfare): .............................................         4). Toilet papers: .........................................................     5). Pencils: ...................................... </p>
+<p>6). Ream of paper (Picfare duplicating): ................................... 7). Crayons: .........................................   8). Box file: ..............................</p>
+</td>
+    </tr>
+    <tr>
+    <td colspan="3"><hr/><td>
+    
+    </tr>
+    <tr>
+    <div align="center"><td align="center"> PREPARE FOR THE FUTURE
+    <p>Not valid without the official school stamp</p>
+    </td></div>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+    <td><hr/></td>
+    </tr>
+    </table>
+    {% endfor %}
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+        ============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+        ============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+        ============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load event_tags %}
+{% block content %} 
+<div id="calendar">
+    {% event_calendar year month event_list %}
+</div>
+{% endblock content %}

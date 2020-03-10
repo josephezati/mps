@@ -1,0 +1,165 @@
+{% extends "hm/base.html" %}
+{% load filename %}
+{% load subtract %}
+{% load get_obj %}
+{% load humanize %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mg-b-30">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n"> Select a child to record fees</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="dof" data-editable="false">DoB.</th>
+                                            <th data-field="gender" data-editable="false">Gender.</th>
+                                            <th data-field="act" data-editable="false">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for child in students %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'child-details' child.id %}" >{{child.name}}</a></td>
+                                            <td>{{child.date_of_birth|date:"N d, Y"}}</td>
+                                            <td>{{child.gender}}</td>
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'record_fees' child.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> record fees</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if child %}
+                <div class="col-lg-6 mg-b-30">
+                {% else %}
+                <div class="col-lg-12 mg-b-30">
+                {% endif %}
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n">Fees Summary</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Child</th>
+                                            <th data-field="dof" data-editable="false">Class</th>
+                                            <th data-field="term" data-editable="false">Term</th>
+                                            <th data-field="gender" data-editable="false">Year</th>
+                                            <th data-field="amount" data-editable="false">Amount</th>
+                                            <th data-field="bal" data-editable="false">Balance</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for fee in fees %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'child-details' fee.child %}" >{% get_child fee.child "name" %}</a></td>
+                                            <td>{% get_class fee.fees_class "name" %}</td>
+                                            <td>{% get_term fee.term "name" %}</td>
+                                            <td>{{fee.year}}</td>
+                                            <td>{{fee.samount|intcomma}}</td>
+                                            <td>
+                                            {% for structure in fees_structure %}
+                                                {% if structure.fees_class.id == fee.fees_class and structure.term.id == fee.term and structure.year == fee.year %} 
+                                                {{structure.amount|subtract:fee.samount|intcomma}}
+                                                {% endif %}
+                                            {% endfor %}</td>
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'fees-record' fee.child fee.fees_class fee.term fee.year %}" style="color: white;"><span class="adminpro-icon adminpro-info"></span>
+                                            {% if child %}
+                                            
+                                            {% else %}
+                                            View Details
+                                            {% endif %}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if child %}
+                <div class="col-lg-6 mg-b-30">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n">Fees Record for {{child}} {{fees_class}} {{term}} {{year}}</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="amount" data-editable="false">Amount</th>
+                                            <th data-field="bal" data-editable="false">Date</th>
+                                            <th data-field="uploads" data-editable="false">Uploads</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for fee in fees_records %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{fee.amount|intcomma}}</td>
+                                            <td>{{fee.date}}</td>
+                                            <td>
+                                                {% if fee.uploads %} <a href="{{fee.uploads.url}}" target="_blank">upload</a>
+                                                {% endif %}</td>
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update_fees' fee.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="conntent box box-body">
+	<div class="section">
+			<!-- CONTAINER -->
+		<div class="container">
+				<!-- ROW -->
+			<div class="row">
+					<!-- Main Column -->
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-4">
+
+				<div class="widget" style="background-color: #fdd704;">
+
+							<div class="section-title">
+								<h2 class="title">YOU HAVE BEEN LOGGED OUT!</h2>
+							</div>
+
+						<div class="conntent" style="margin-bottom: 5%; margin: 5%;">
+							<form method="POST">
+							{% csrf_token %}	
+							<fieldset>
+														
+							{{ form|crispy }}
+								<h3 class="">Thanks for supporting <b>NRM</b>.</h3>
+								<H4>We are so happy to see you around!</H4>
+								<a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Login Again</a>
+							<fieldset>
+							</form>
+
+					</div>
+					</div>
+
+				</div><!-- Main Column -->
+				<div class="col-md-3">
+				</div>
+			</div><!-- ROW -->
+		</div><!-- CONTAINER -->
+	</div>
+
+</div>
+{% endblock content %}

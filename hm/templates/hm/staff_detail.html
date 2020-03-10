@@ -1,0 +1,670 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+<div class="row">
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+<div class="project-details-wrap shadow-reset">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="project-details-title">
+                <h2><span class="profile-details-name-nn">{{ staff.name}}</span></h2>
+            </div>
+            <ul id="adminpro-demo2" class="comment-action-st collapse">
+                </li>
+                <li><a href="" target="_blank">Update</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="admin-comment-month project-details-action">
+                <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2">More...</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="project-details-st">
+                            <img src="{{staff.photo.url}}" alt="{{staff.name}}`s Photo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Status:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{{ staff.status}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Position:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="btn-group project-list-ad">
+                            <button class="btn btn-white btn-xs">{{ staff.position}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Email:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ staff.email}} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Phone :</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <span>{{ staff.phone}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Adress:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ staff.district}} {{ staff.address}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Gender:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <span>{{ staff.gender}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>D.o.B:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ staff.dob}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>Created:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ staff.date_created|date:"N d, Y"}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-details-mg">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="project-details-st">
+                            <span><strong>By:</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="project-details-dt">
+                            <a href="#">{{ staff.user}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="project-details-tab">
+                <ul class="nav nav-tabs res-pd-less-sm">
+                    <li class="active"><a data-toggle="tab" href="#designations">Designations</a>
+                    <li><a data-toggle="tab" href="#parent">NextOfKin</a>
+                    </li>
+                    <li><a data-toggle="tab" href="#subjects">Subjects</a>
+                    <li><a data-toggle="tab" href="#classes">Classes</a>
+                    <li><a data-toggle="tab" href="#records">Track Records</a>
+                    <li><a data-toggle="tab" href="#qualifications">Qualifications</a>
+                    </li>
+                    <li><a data-toggle="tab" href="#leaves">Leaves</a>
+                    </li>
+                </ul>
+            <div class="tab-content res-tab-content-project">
+            <!-- content tab  -->
+            <div id="leaves" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbarl">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbarl">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="res" data-editable="false">Reason</th>
+                                            <th data-field="from" data-editable="false">From</th>
+                                            <th data-field="to" data-editable="false">To</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for leave in leaves %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{leave.reason}}</a></td>
+                                            <td>{{leave.date_from}}</td>
+                                            <td>{{leave.date_to}}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-leave' leave.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            <div id="qualifications" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbarq">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbarq">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="qual" data-editable="false">Qualification</th>
+                                            <th data-field="ins" data-editable="false">Institution</th>
+                                            <th data-field="year" data-editable="false">Year</th>
+                                            <th data-field="doc" data-editable="false">Docs</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for qualification in academics %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{qualification.qualification}}</a></td>
+                                            <td>{{qualification.institution}}</td>
+                                            <td>{{qualification.year}}</td>
+                                            <td>{% if qualification.document %}<a href="{{qualification.document.url}}">doc</a>{% endif %}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-qualification' qualification.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            <div id="classes" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbarc">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbarc">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="class" data-editable="false">Class</th>
+                                            <th data-field="stream" data-editable="false">Stream</th>
+                                            <th data-field="from" data-editable="false">From</th>
+                                            <th data-field="to" data-editable="false">To</th>
+                                            <th data-field="rol" data-editable="false">Role</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for clas in classes %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{clas.teacher_class}}</a></td>
+                                            <td>{{clas.stream}}</td>
+                                            <td>{{clas.year_from}}</td>
+                                            <td>{{clas.year_to}}</td>
+                                            <td>{{clas.role}}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-tclass' clas.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            <div id="designations" class="tab-pane in active fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbard">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbard">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="pos" data-editable="false">Position</th>
+                                            <th data-field="scale" data-editable="false">Scale</th>
+                                            <th data-field="date" data-editable="false">Date Appointed</th>
+                                            <th data-field="letter" data-editable="false">Letter</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for designation in designations %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{designation.position}}</a></td>
+                                            <td>{{designation.scale}}</td>
+                                            <td>{{designation.date_appointed}}</td>
+                                            <td>{% if designation.appointment_letter %}<a href="{{designation.appointment_letter.url}}" target="_blank">letter</a> {% endif %}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-designation' designation.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            <div id="parent" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbarn">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbarn">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="gender" data-editable="false">Gender</th>
+                                            <th data-field="occ" data-editable="false">Occupation</th>
+                                            <th data-field="phone" data-editable="false">Phone</th>
+                                            <th data-field="rel" data-editable="false">Relation</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for parent in nextofkins %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{parent.name}}</a></td>
+                                            <td>{{parent.gender}}</td>
+                                            <td>{{parent.occupation}}</td>
+                                            <td>{{parent.phone}}</td>
+                                            <td>{{parent.relation}}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-tnext' parent.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div id="subjects" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar2">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar2">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="sub" data-editable="false">Subject</th>
+                                            <th data-field="class" data-editable="false">Class</th>
+                                            <th data-field="year" data-editable="false">Year</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for subject in subjects %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="">{{subject.subject}}</a></td>
+                                            <td>{{subject.subject_class}}</td>
+                                            <td>{{subject.year}}</td>
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-tsubject' subject.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div id="records" class="tab-pane fade">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar6">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar6">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="act" data-editable="false">Action</th>
+                                            <th data-field="date" data-editable="false">Date</th>
+                                            <th data-field="comm" data-editable="false">Comment</th>
+                                            <th data-field="ac" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for trackrecord in trackrecords %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{trackrecord.action}}</td>
+                                            <td>{{trackrecord.date}}</td>
+                                            <td>{{trackrecord.comment}}</td>
+                                            
+                                            <td><a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-trecord' trackrecord.id staff.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+        <div class="income-title">
+            <div class="main-income-head">
+                <h2>Actions for this staff</h2>
+            </div>
+        </div>
+        <div class="income-dashone-pro">
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_parent">Add Next of Kin</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_subject">Add Subject</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_class">Add Class</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_record">Add Track Record</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_qualification">Add Qualification</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_designation">Add Designation</a>
+            </div>
+            </div>
+            <div class="row mg-b-10">
+            <div class="modal-bootstrap modal-login-form">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#add_leave">Add Leave Request</a>
+            </div>
+            </div>
+            <div id="add_leave" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add leave for {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ leave_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_designation" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add designation for {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ designation_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_qualification" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add qualification for {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ academic_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_class" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add a Class for {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ class_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_parent" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add Next of Kin {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ nextofkin_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_record" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Add Track Record for {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ trackrecord_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="add_subject" class="modal modal-adminpro-general fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                            <h4>Refer {{ staff.name}}</h4>   
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}    
+                                <fieldset>
+                                    {{ teachersubject_form|crispy }}
+                                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                                </fieldset>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

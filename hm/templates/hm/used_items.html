@@ -1,0 +1,67 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block content %} 
+<div class="button-adminpro-area mg-t-40">
+<div class="container">
+<div class="row">
+<div class="col-md-12 mg-b-30">
+<div class="sparkline13-list shadow-reset">
+    <div class="sparkline13-hd">
+        <div class="main-sparkline13-hd">
+            <h1>{{ head }} Available Items<span class="table-project-n"></span></h1>
+            <div class="sparkline13-outline-icon">
+                <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                <span><i class="fa fa-wrench"></i></span>
+                <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="sparkline13-graph">
+        <div class="datatable-dashv1-list custom-datatable-overright">
+            <div id="toolbar">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                <thead>
+                    <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="item" data-editable="false">Item</th>
+                        <th data-field="from" data-editable="false">Quantity Used</th>
+                        <th data-field="by" data-editable="false">Recieved by</th>
+                        <th data-field="date" data-editable="false">Date</th>
+                        <th data-field="upload" data-editable="false">Upload</th>
+                        <th data-field="used" data-editable="false">comment</th>
+                        <th data-field="act" data-editable="false">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td></td>
+                        <td>{{item.item}}</td>
+                        <td>{{item.quantity_used}} {{item.item.unit_measure}}</td>
+                        <td>{{item.received_by}}</td>
+                        <td>{{item.date_created}}</td>
+                        <td><a href="{% if item.uploads %}{{item.uploads.url}}{% endif %}" target="_blank">{% if item.uploads %}upload{% endif %}</a></td>
+                        <td>{{item.comment}}</td>
+                        <td> <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'use-item' item.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> edit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

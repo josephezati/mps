@@ -1,0 +1,75 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                <div class="button-ad-wrap mg-b-40">
+
+                <h4>{% if tags == "update" %}Update Fees{% else %}Set Fees{% endif %}</h4> 
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}    
+                        <fieldset>
+                            {{ form|crispy }}
+                            <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                        </fieldset>
+                    </form>
+                </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n"> Recently Recorded Fees</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="false" data-show-pagination-switch="false" data-show-refresh="false" data-key-events="false" data-show-toggle="false" data-resizable="false" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="dof" data-editable="false">Class</th>
+                                            <th data-field="term" data-editable="false">Term</th>
+                                            <th data-field="gender" data-editable="false">Year</th>
+                                            <th data-field="amount" data-editable="false">Amount</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for fee in fees %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{fee.fees_class}}</td>
+                                            <td>{{fee.term}}</td>
+                                            <td>{{fee.year}}</td>
+                                            <td>{{fee.amount}}</td>
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-set-fees' fee.id %}"style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Edit</a> <a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'delete-set-fees' fee.id %}"style="color: white;"><span class="adminpro-icon adminpro-trash"></span>Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

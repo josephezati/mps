@@ -1,0 +1,790 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load has_group %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+        {% if submenu %}
+        <title>MPS - {{ title }} - {{ submenu }}</title>
+        {% else %}
+        <title>MPS - {{ title }}</title>
+        {% endif %}
+    {% else %}
+    <title>MPS</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'cal/css/style.css' %}">
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/1.PNG' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+
+    <!-- select2 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+    <!-- switcher CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+        <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/datapicker/datepicker3.css' %}">
+    <!-- Color Css Files
+        ============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+</head>
+{% if user.is_authenticated %}
+{% else%}
+<style> 
+#body {
+    min-height: 100%;
+    background-color: #fff;
+    height: 100%;
+    background-image: url("{% static 'img/bg.jpg' %}");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+</style>
+{% endif %}
+
+<body id="body">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Header top area start-->
+    <!-- <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <div class="admin-logo">
+                        <a href="#"><img src="{% static 'img/logo/log2.png' %}" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav mai-top-nav">
+                            <li class="nav-item"><a href="{% url 'hm-home'  %}" class="nav-link">Home</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                            {% else %}
+                            <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a>
+                            </li>
+                            {% endif %}
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-9 col-sm-6 col-xs-12">
+                    <div class="header-right-info">
+                        <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                       
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                    <span class="admin-name">{% if user.is_authenticated %}{{ user.first_name}}{% else %} Get Started{% endif %}</span>
+                                    <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                </a>
+                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url 'profile' %}"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
+                                    </li>
+                                    <li><a href="{% url 'update-profile' %}"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>Update Profile</a>
+                                    </li>
+                                    <li><a href="{% url 'logout' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{% url 'register' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Register</a>
+                                    </li>
+                                    <li><a href="{% url 'login' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Login</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Header top area end-->
+    {% if user.is_authenticated %}
+    {% else %}
+    <div>
+        <a href="#"><img src="{% static 'img/log77.png' %}" alt="" style="width: 100%;"/>
+            </a>
+    </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+    {% block menu %}
+
+        <!-- Main Menu area start-->
+    <div class="main-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div style="display: flex;">
+                        <a href="#"><img src="{% static 'img/logo/log71.png' %}" alt="" />
+                        </a>
+                        <a href="{% url 'logout'%}"><img src="{% static 'img/logo/log72.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <ul class="nav nav-tabs custom-menu-wrap">
+                    {% if request.user|has_group:"HM" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="{% if title == 'Children'  %} active {% endif %}"><a data-toggle="tab" href="#children"><i class="fa fa-users"></i> Children</a>
+                        </li>
+                        <li class="{% if title == 'Staff'  %} active {% endif %}"><a data-toggle="tab" href="#staff"><i class="fa fa-user"></i> Staff</a>
+                        </li>
+                        <li class="{% if title == 'Academia'  %} active {% endif %}"><a data-toggle="tab" href="#academia"><i class="fa fa-book"></i> Academia</a>
+                        </li>
+                        <li class="{% if title == 'Finance'  %} active {% endif %}"><a data-toggle="tab" href="#finance"><i class="fa fa-dollar"></i> Fees</a>
+                        </li>
+                        <li class="{% if title == 'Expense'  %} active {% endif %}"><a data-toggle="tab" href="#expenses"><i class="fa fa-dollar"></i> Expenses</a>
+                        </li>
+                        <li class="{% if title == 'Library'  %} active {% endif %}"><a data-toggle="tab" href="#library"><i class="fa fa-book"></i> Library</a>
+                        </li>
+                        <li class="{% if title == 'Store'  %} active {% endif %}"><a data-toggle="tab" href="#store"><i class="fa fa-home"></i> Inventory</a>
+                        </li>
+                        <li class="{% if title == 'Settings'  %} active {% endif %}"><a data-toggle="tab" href="#settings"><i class="fa fa-gear"></i> Settings</a>
+                        </li>
+                    {% elif request.user|has_group:"DOS" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home">Home</a>
+                        </li>
+                    {% elif request.user|has_group:"TEACHER" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="{% if title == 'Marks'  %} active {% endif %}"><a data-toggle="tab" href="#Marks"><i class="fa fa-book"></i> Marks</a>
+                        </li>
+                    {% elif request.user|has_group:"PARENT" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="{% if title == 'Children'  %} active {% endif %}"><a data-toggle="tab" href="#my_children"><i class="fa fa-users"></i> Children</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                    {% if request.user|has_group:"HM" %}
+                        <div id="Home" class="tab-pane {% if title == 'Home'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'hm-home'  %}"  style=" {% if submenu == 'Home'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-home"></i> Dashboard</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'meeting'  %}"  style=" {% if submenu == 'Meetings'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Meetings</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'messanger'  %}"  style=" {% if submenu == 'Communication'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-envelope"></i> Communication</a>
+                                </li>
+
+                                <li class="active" ><a href="{% url 'calendar' %}"  style=" {% if submenu == 'Calendar'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Calendar</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="children" class="tab-pane {% if title == 'Children'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'new-student'  %}" style=" {% if submenu == 'Add Child'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Add Child</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'view-children'  %}" style=" {% if submenu == 'View Children'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> View Children</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'gatepass'  %}" style=" {% if submenu == 'Gate Pass'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Gate Pass</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'disciplinary-records'  %}" style=" {% if submenu == 'Disciplinary Records'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Disciplinary Records</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'health-records'  %}" style=" {% if submenu == 'Health Records'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Health Records</a>
+                                <li class="active" ><a href="{% url 'parents'  %}" style=" {% if submenu == 'Parents'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Parents</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="academia" class="tab-pane {% if title == 'Academia'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'choose-review'  %}" style=" {% if submenu == 'Review Performance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Review Performance</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-report-cards'  %}" style=" {% if submenu == 'Report Cards'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-book"></i> Report Cards</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'select-analysis'  %}" style=" {% if submenu == 'Marks Analysis'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-line-chart"></i> Result Analysis</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-attendance'  %}" style=" {% if submenu == 'Track Daily Attendance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Track Daily Attendance</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'select-attendance'  %}" style=" {% if submenu == 'View Attendance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> View Attendance</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="staff" class="tab-pane {% if title == 'Staff'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'new-staff'  %}" style=" {% if submenu == 'Add Staff'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Add Staff</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'view-staff'  %}" style=" {% if submenu == 'View Staff'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> View Staff</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'class-teachers'  %}" style=" {% if submenu == 'Class Teachers'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Class Teachers</a></li>
+                                <li class="active" ><a href="{% url 'subject-teachers'  %}" style=" {% if submenu == 'Subject Teachers'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Subject Teachers</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'contracts'  %}" style=" {% if submenu == 'Contracts'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Contracts</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'leaves'  %}" style=" {% if submenu == 'Leaves'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Leaves</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'track-records'  %}" style=" {% if submenu == 'Track Records'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Track Records</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="administration" class="tab-pane {% if title == 'Administration'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'meeting'  %}" style=" {% if submenu == 'Meetings'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Meetings</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'hm-home'  %}" style=" {% if submenu == 'Contracts'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Contracts</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'hm-home'  %}" style=" {% if submenu == 'Appraisals'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Appraisals</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'hm-home'  %}" style=" {% if submenu == 'Track Records'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Track Records</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'hm-home'  %}" style=" {% if submenu == 'Supervisions'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Supervisions</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'hm-home'  %}" style=" {% if submenu == 'Evaluations'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Evaluations</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="finance" class="tab-pane {% if title == 'Finance'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'fees'  %}" style=" {% if submenu == 'Fees'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-dollar"></i> Fees</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-fees-report'  %}" style=" {% if submenu == 'Fees Report'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Fees Report</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-fees'  %}" style=" {% if submenu == 'Set Fees'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Set Fees</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'income'  %}" style=" {% if submenu == 'Incomes'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-dollar"></i> Incomes</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-income-report'  %}" style=" {% if submenu == 'Income Report'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Income Report</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="expenses" class="tab-pane {% if title == 'Expense'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'bill'  %}" style=" {% if submenu == 'Add Expense'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-dollar"></i> Add Expenses</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-bill-report'  %}" style=" {% if submenu == 'Expense Report'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Expense Report</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="library" class="tab-pane {% if title == 'Library'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'book'  %}" style=" {% if submenu == 'Books'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-book"></i> Books</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'lend-book'  %}" style=" {% if submenu == 'Lend Books'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-send"></i> Lend Books</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'return-book'  %}" style=" {% if submenu == 'Return Books'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Return Books</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="store" class="tab-pane {% if title == 'Store'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'expense'  %}" style=" {% if submenu == 'Add New Item'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Add New Item</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'items-summary'  %}" style=" {% if submenu == 'Items Summary'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Items Summary</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'available-items'  %}" style=" {% if submenu == 'Available Items'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Available Items</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'used-items'  %}" style=" {% if submenu == 'Used Items'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Used Items</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-expense-report'  %}" style=" {% if submenu == 'Items Report'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> Items Report</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="settings" class="tab-pane {% if title == 'Settings'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'set-children'  %}" style=" {% if submenu == 'Children'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-users"></i> Children</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-staff'  %}" style=" {% if submenu == 'Staff'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-user"></i> Staff</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-academia'  %}" style=" {% if submenu == 'Academia'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-book"></i> Academia</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-finance'  %}" style=" {% if submenu == 'Finance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-dollar"></i> Finance</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-inventory'  %}" style=" {% if submenu == 'Inventory'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-home"></i> Inventory</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-library'  %}" style=" {% if submenu == 'Library'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-book"></i> Library</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'set-general'  %}" style=" {% if submenu == 'General'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-gear"></i> General</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    {% elif request.user|has_group:"TEACHER" %}
+                    <div id="Home" class="tab-pane {% if title == 'Home'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'calendar'  %}" style=" {% if submenu == 'Calendar'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Calendar</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'meeting'  %}"  style=" {% if submenu == 'Meetings'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Meetings</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'messanger'  %}"  style=" {% if submenu == 'Communication'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-envelope"></i> Communication</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+
+                    <div id="Marks" class="tab-pane {% if title == 'Marks'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'choose-subject'  %}" style=" {% if submenu == 'Enter Marks'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Enter Marks</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'choose-marks'  %}" style=" {% if submenu == 'View Marks'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-list"></i> View Marks</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'class-choose-review'  %}" style=" {% if submenu == 'Review Class Performance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Review Class Performance</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'subject-choose-review'  %}" style=" {% if submenu == 'Review Subject Performance'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-edit"></i> Review Subject Performance</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    {% elif request.user|has_group:"PARENT" %}
+                    <div id="Home" class="tab-pane {% if title == 'Home'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'calendar'  %}" style=" {% if submenu == 'Calendar'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Calendar</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'meeting'  %}"  style=" {% if submenu == 'Meetings'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-calendar"></i> Meetings</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'messanger'  %}"  style=" {% if submenu == 'Communication'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-envelope"></i> Communication</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+
+                    <div id="my_children" class="tab-pane {% if title == 'Children'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'my-children'  %}" style=" {% if submenu == 'My Children'  %} background-color: skyblue; color: white; {% endif %}"><i class="fa fa-users"></i> My Children</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Mob Menu -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="mobile-menu">
+                <nav id="dropdown">
+                    <ul class="mobile-menu-nav">
+                    {% if request.user|has_group:"hm" %}
+                        <li><a data-toggle="collapse" data-target="#Home" href="#">Home <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+
+                            <ul id="Home" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="">Home</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#acades" href="#">Acades <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="acades" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home'  %}">Add Acade</a></li>
+                                <li><a href="{% url 'hm-home'  %}">View Acades</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#rooms" href="#">Rooms <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="rooms" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home'  %}">Add Room</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">All Rooms</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Free Rooms</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Occupied Rooms</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Unavailable Rooms</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Booking Requests</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#owners" href="#">Owner <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="owners" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home'  %}">Add Owner</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">All Owners</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Current Owners</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Previous Owners</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#tenants" href="#">Tenants <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="tenants" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home'  %}">Booking Requests</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Pending Bookings</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Rejected Bookings</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">All Tenants</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Current Tenants</a>
+                                </li>
+                                <li><a href="{% url 'hm-home'  %}">Previous Tenants</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><a data-toggle="collapse" data-target="#rents" href="#">Rent <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="rents" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home' %}">Add Rent</a>
+                                </li>
+                                <li><a href="{% url 'hm-home' %}">View Rent</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#employees" href="#">Employees <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="employees" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home' %}">Add Employee</a>
+                                </li>
+                                <li><a href="{% url 'hm-home' %}">All Employees</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#bills" href="#">Bills <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="bills" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'hm-home' %}">Add Bill</a>
+                                </li>
+                                <li><a href="{% url 'hm-home' %}">All Bills</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+
+                    </ul>
+                    </nav>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock menu %}
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+        {% if messages%}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{ message }}
+                                                
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+    </div>
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Chat Box Start-->
+    <div class="chat-list-wrap">
+        <div class="chat-list-adminpro">
+            <div class="chat-button">
+                <span data-toggle="collapse" data-target="#chat" class="chat-icon-link"><i class="fa fa-comments"></i></span>
+            </div>
+            <div id="chat" class="collapse chat-box-wrap shadow-reset animated zoomInLeft">
+                <div class="chat-main-list">
+                    <div class="chat-heading">
+                        <h2>Messanger</h2>
+                    </div>
+                    <div class="chat-content chat-scrollbar">
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:15 am</span></h3>
+                            <p>Hi, what you are doing and where are you gay?</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:10 am</span></h3>
+                            <p>Now working in graphic design with coding and you?</p>
+                        </div>
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:05 am</span></h3>
+                            <p>Practice in programming</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:02 am</span></h3>
+                            <p>That's good man! carry on...</p>
+                        </div>
+                    </div>
+                    <div class="chat-send">
+                        <input type="text" placeholder="Type..." />
+                        <span><button type="submit">Send</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    {% if title == 'Register' %}
+
+ <div class="button-adminpro-area mg-t-30 mg-b-30">
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Create an account to Join!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Register</button>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Already have an account</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% elif title == 'Logged out' %}
+<div class="row mg-t-40 mg-b-40"></div>
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login again! or Register!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <a class="btn btn-success" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% elif title == 'Home' %}
+<div class="button-adminpro-area mg-t-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login to get Started</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <a class="btn btn-success" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% else %}
+
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login to get Started</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Login</button>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+{% endif %}
+    <!-- Chat Box End-->
+        <!-- Footer Start-->
+
+    
+    {% if user.is_authenticated %}
+    {% if submenu == 'Calendar' %}
+    {% else %}
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright &#169; 2019 AMS All rights reserved. Designed and Powered by <a href="https://globalautosystems.co.ug">Glabal Auto Systems</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <div  style="bottom: 0;">
+        <a href="#"><img src="{% static 'img/log88.png' %}" alt="" style="width: 100%;"/>
+            </a>
+    </div>
+    {% endif %}
+    <!-- Footer End-->
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+        ============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+        ============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+        ============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+
+        <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'js/select2/select2-active.js' %}"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

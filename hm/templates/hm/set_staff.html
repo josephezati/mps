@@ -1,0 +1,109 @@
+{% extends 'hm/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filename %}
+{% load humanize %}
+{% block extrahead %}   {# Extra Resources Start #}
+{{ form.media }}        {# Form required JS and CSS #}
+{% endblock %}          {# Extra Resources End #}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Positions</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Position" style="width: 85%" required="required"></td></tr>
+                        <tr> 
+                            <td>
+                            <select name="category" required="required">
+                                <option value="">--select category--</option>
+                                {% for category in categories %}
+                                <option value="{{category.id}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit" name="save_position">Save</button></td></tr>
+                        {% for position in positions %} 
+                            <tr>
+                                <td>{{position.name}}</td>
+                                <td><a href="{% url 'delete-position' position.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Categories</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Category" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_category">Save</button></td></tr>
+                        {% for category in categories %} 
+                        
+                            <tr>
+                                <td>{{category.name}}</td>
+                                <td><a href="{% url 'delete-staff-category' category.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="button-ad-wrap mg-b-30 mg-t-30">
+            <h4>Status</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Status" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_status">Save</button></td></tr>
+                        {% for status in statuses %} 
+                            <tr>
+                                <td>{{status.name}}</td>
+                                <td><a href="{% url 'delete-staff-status' status.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="button-ad-wrap mg-b-30">
+            <h4>Salary Scales</h4> 
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}    
+                    <fieldset>
+                        <table>
+                       <tr> <td><input type="text" name="name" placeholder="Enter Scale" style="width: 85%" required="required"></td>
+                        <td><button type="submit" name="save_scale">Save</button></td></tr>
+                        {% for scale in scales %} 
+                            <tr>
+                                <td>{{scale.name}}</td>
+                                <td><a href="{% url 'delete-scale' scale.id %}">remove</a></td>
+                            </tr>
+                        
+                        {% endfor %} 
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
